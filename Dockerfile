@@ -256,6 +256,7 @@ COPY --from=pg-duckdb-builder /out/pg_duckdb.zip /tmp/pg_duckdb.zip
 RUN set -ex; \
     apt-get -qqy --fix-missing update; \
     apt-get -qqy --fix-missing install --no-install-recommends \
+    ca-certificates \
     curl \
     nano \
     openssl \
