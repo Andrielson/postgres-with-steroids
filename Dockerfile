@@ -274,6 +274,7 @@ RUN set -ex; \
     wget https://github.com/supabase/wrappers/releases/download/v0.5.1/wrappers-v0.5.1-pg17-amd64-linux-gnu.deb -O /tmp/supabase-wrappers.deb; \
     dpkg -i /tmp/supabase-wrappers.deb; \
     echo "postgres ALL=(root) NOPASSWD: /usr/bin/mkdir, /bin/chown, /usr/bin/openssl" > /etc/sudoers.d/postgres; \
+	echo "shared_preload_libraries='pg_duckdb'" >> /usr/share/postgresql/postgresql.conf.sample; \
     rm -rf /var/lib/apt/lists/* /tmp/pg_duckdb.zip /tmp/supabase-wrappers.deb;
 
 # Add init scripts while setting permissions
