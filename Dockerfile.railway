@@ -227,14 +227,14 @@ ENV CCACHE_DIR=/ccache
 
 WORKDIR /build
 
-RUN set -ex; \
+RUN --mount=type=cache,id=s/9c234b70-1d1e-408f-9d28-89dbdb3ad2ef-/ccache,target=/ccache set -ex; \
     apt-get -qqy --fix-missing update; \
     apt-get -qqy --fix-missing install \
     postgresql-server-dev-17 \
     build-essential libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev \
     libssl-dev libxml2-utils xsltproc pkg-config libc++-dev libc++abi-dev libglib2.0-dev \
     libtinfo6 cmake libstdc++-12-dev liblz4-dev ccache ninja-build git zip && \
-    mkdir /ccache /out; \
+    mkdir /out; \
     git clone --recurse-submodules https://github.com/duckdb/pg_duckdb.git .; \
     make clean-all; \
     echo "Available CPUs=$(nproc)"; \
