@@ -270,7 +270,7 @@ RUN set -ex; \
     unzip \
     wget; \
     apt-get -qqy --fix-missing dist-upgrade; \
-    unzip /tmp/pg_duckdb.zip -d / -qq -o; \
+    unzip -oqq /tmp/pg_duckdb.zip -d /; \
     wget --quiet --output-document=/tmp/supabase-wrappers.deb https://github.com/supabase/wrappers/releases/download/v0.5.1/wrappers-v0.5.1-pg17-amd64-linux-gnu.deb; \
     dpkg --install /tmp/supabase-wrappers.deb; \
     echo "postgres ALL=(root) NOPASSWD: /usr/bin/mkdir, /bin/chown, /usr/bin/openssl" > /etc/sudoers.d/postgres; \
