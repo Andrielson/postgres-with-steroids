@@ -183,7 +183,7 @@ RUN install --verbose --directory --owner postgres --group postgres --mode 3777 
 ENV PGDATA=/var/lib/postgresql/data
 # this 1777 will be replaced by 0700 at runtime (allows semi-arbitrary "--user" values)
 RUN install --verbose --directory --owner postgres --group postgres --mode 1777 "$PGDATA"
-VOLUME /var/lib/postgresql/data
+# VOLUME /var/lib/postgresql/data
 
 COPY --chmod=755 docker-entrypoint.sh docker-ensure-initdb.sh /usr/local/bin/
 RUN ln -sT docker-ensure-initdb.sh /usr/local/bin/docker-enforce-initdb.sh
