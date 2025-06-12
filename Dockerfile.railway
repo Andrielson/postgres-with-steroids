@@ -29,7 +29,7 @@ RUN --mount=type=cache,id=s/9c234b70-1d1e-408f-9d28-89dbdb3ad2ef-/ccache,target=
 ###
 ### FINAL IMAGE
 ###
-FROM postgres-16-noble
+FROM ghcr.io/andrielson/postgres:16-noble
 
 COPY --from=pg-duckdb-builder /out/pg_duckdb.zip /tmp/pg_duckdb.zip
 
