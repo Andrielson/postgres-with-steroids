@@ -3,7 +3,7 @@ name: Docker Image CI/CD for latest
 on:
   push:
     branches:
-      - 17-noble
+      - main
     paths:
       - ".github/workflows/build-image.yaml"
       - docker-ensure-initdb.sh
