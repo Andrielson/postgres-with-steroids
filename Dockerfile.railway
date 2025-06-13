@@ -2,7 +2,7 @@
 ###
 ### PG DUCKDB BUILDER
 ###
-FROM ghcr.io/andrielson/postgres:16-noble AS pg-duckdb-builder
+FROM ghcr.io/andrielson/postgres:17-noble AS pg-duckdb-builder
 
 ENV PATH=/usr/lib/ccache:$PATH
 ENV CCACHE_DIR=/ccache
@@ -12,7 +12,7 @@ WORKDIR /build
 RUN --mount=type=cache,id=s/9c234b70-1d1e-408f-9d28-89dbdb3ad2ef-/ccache,target=/ccache set -ex; \
     apt-get -qqy --fix-missing update; \
     apt-get -qqy --fix-missing install \
-    postgresql-server-dev-16 \
+    postgresql-server-dev-17 \
     build-essential libreadline-dev zlib1g-dev flex bison libxml2-dev libxslt-dev \
     libssl-dev libxml2-utils xsltproc pkg-config libc++-dev libc++abi-dev libglib2.0-dev \
     libtinfo6 cmake libstdc++-12-dev liblz4-dev ccache ninja-build git zip && \
@@ -29,7 +29,7 @@ RUN --mount=type=cache,id=s/9c234b70-1d1e-408f-9d28-89dbdb3ad2ef-/ccache,target=
 ###
 ### FINAL IMAGE
 ###
-FROM ghcr.io/andrielson/postgres:16-noble
+FROM ghcr.io/andrielson/postgres:17-noble
 
 COPY --from=pg-duckdb-builder /out/pg_duckdb.zip /tmp/pg_duckdb.zip
 
@@ -42,18 +42,18 @@ RUN set -ex; \
     curl \
     nano \
     openssl \
-    postgresql-16-age \
-    postgresql-16-h3 \
-    postgresql-16-pgvector \
-    postgresql-16-postgis-3 \
-    postgresql-16-timescaledb \
-    postgresql-plpython3-16 \
+    postgresql-17-age \
+    postgresql-17-h3 \
+    postgresql-17-pgvector \
+    postgresql-17-postgis-3 \
+    postgresql-17-timescaledb \
+    postgresql-plpython3-17 \
     sudo \
     unzip \
     wget; \
     apt-get -qqy --fix-missing dist-upgrade; \
     unzip -oqq /tmp/pg_duckdb.zip -d /; \
-    wget --quiet --output-document=/tmp/supabase-wrappers.deb https://github.com/supabase/wrappers/releases/download/v0.5.1/wrappers-v0.5.1-pg16-amd64-linux-gnu.deb; \
+    wget --quiet --output-document=/tmp/supabase-wrappers.deb https://github.com/supabase/wrappers/releases/download/v0.5.1/wrappers-v0.5.1-pg17-amd64-linux-gnu.deb; \
     dpkg --install /tmp/supabase-wrappers.deb; \
     echo "postgres ALL=(root) NOPASSWD: /usr/bin/mkdir, /bin/chown, /usr/bin/openssl" > /etc/sudoers.d/postgres; \
 	echo "shared_preload_libraries='pg_duckdb'" >> /usr/share/postgresql/postgresql.conf.sample; \
